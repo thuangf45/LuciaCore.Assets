@@ -28,7 +28,7 @@ That's it — no build step, no bundler, no framework installation.
 | [docs/content-json.md](docs/content-json.md) | The 4 sections of `content.json`: `system`, `pages`, `contents`, `components` |
 | [docs/syntax-reference.md](docs/syntax-reference.md) | Every node field (`type`, `style`, `props`, `item`, `loop`, `api`, `action`, `position`...), all built-in layouts and primitives |
 | [docs/actions.md](docs/actions.md) | The full action language: system actions, pipelines (`\|>`), conditions (`?=> :=>`), variables (`${}`), and custom action modules |
-| [docs/license.md](docs/license.md) | License terms and commercial use |
+| [docs/custom-modules.md](docs/custom-modules.md) | Writing your own `.js` render/action modules: function contracts, file placement rules, real examples |
 
 ## Try it now
 
