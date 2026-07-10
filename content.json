@@ -5,7 +5,7 @@
     "versionCheckInterval": 2000,
     "sw": {
       "enabled": true,
-      "path": "sw",
+      "path": "luciacore.sw",
       "cacheExtensions": [
         ".html",
         ".js",
@@ -96,7 +96,7 @@
             {
               "type": "custom_product_detail_section",
               "content": "product_detail_content",
-              "api": "/v1/api/product"
+              "api": "/assets/data/products.json?filter=id=props:id"
             }
           ]
         }
@@ -1025,7 +1025,7 @@
                       "style": "color:red;"
                     },
                     {
-                      "type": "assets::js::module::button::button_2",
+                      "type": "button",
                       "label": "props:buyLabel",
                       "price": "props:price",
                       "action": "props:buyAction"
