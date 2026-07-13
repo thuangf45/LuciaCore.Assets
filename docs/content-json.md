@@ -55,7 +55,7 @@ An array of routes. Each page is:
 
 | Field | Description |
 |---|---|
-| `name` | Route identifier. Navigate to it with `navigate::to::home`. |
+| `name` | Route identifier. Navigate to it with `go::page::home`. |
 | `loading` | (optional) The `type` of a node to show while this page compiles. Defaults to the built-in `loading` spinner. |
 | `layout` | The root node of the page — see [syntax-reference.md](syntax-reference.md) for everything a node can contain. |
 
@@ -71,8 +71,8 @@ Reusable **prop presets** — named bundles of data you can attach to any node i
     "name": "template_header",
     "props": {
       "src": "https://picsum.photos/id/1005/100/100",
-      "action": "navigate::to::home",
-      "list": [ { "label": "[icon:Bell]", "action": "navigate::to::inbox" } ]
+      "action": "go::page::home",
+      "list": [ { "label": "[icon:Bell]", "action": "go::page::inbox" } ]
     }
   }
 ]
@@ -111,7 +111,7 @@ Once declared, use `custom_button_icon` anywhere as if it were a built-in type:
 ```json
 {
   "type": "custom_button_icon",
-  "props": { "label": "[icon:Bell]", "action": "navigate::to::inbox", "style": "" }
+  "props": { "label": "[icon:Bell]", "action": "go::page::inbox", "style": "" }
 }
 ```
 
