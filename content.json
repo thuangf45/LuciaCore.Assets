@@ -1,8 +1,8 @@
 {
   "system": {
     "version": "2.2.1",
-    "debug": true,
-    "versionCheckInterval": 2000,
+    "debug": false,
+    "versionCheckInterval": 5000,
     "sw": {
       "enabled": true,
       "path": "luciacore.sw",
@@ -116,27 +116,27 @@
       "name": "template_header",
       "props": {
         "src": "https://picsum.photos/id/1005/100/100",
-        "action": "navigate::to::home",
+        "action": "go::page::home",
         "placeholder": "Search...",
         "list": [
           {
             "label": "[icon:Message-Circle]",
-            "action": "navigate::to::home",
+            "action": "go::page::home",
             "style": ""
           },
           {
             "label": "[icon:Bell]",
-            "action": "navigate::to::inventory",
+            "action": "go::page::inventory",
             "style": ""
           },
           {
             "label": "[icon:Shopping-Cart]",
-            "action": "navigate::to::home",
+            "action": "go::page::home",
             "style": ""
           },
           {
             "label": "[icon:User-Circle]",
-            "action": "navigate::to::login",
+            "action": "go::page::login",
             "style": ""
           }
         ]
@@ -153,25 +153,25 @@
                 "type": "text",
                 "level": "span",
                 "label": "Consulting",
-                "action": "navigate::to::services/consulting"
+                "action": "go::page::services/consulting"
               },
               {
                 "type": "text",
                 "level": "span",
                 "label": "Support",
-                "action": "navigate::to::services/support"
+                "action": "go::page::services/support"
               },
               {
                 "type": "text",
                 "level": "span",
                 "label": "Customization",
-                "action": "navigate::to::services/custom"
+                "action": "go::page::services/custom"
               },
               {
                 "type": "text",
                 "level": "span",
                 "label": "Training",
-                "action": "navigate::to::services/training"
+                "action": "go::page::services/training"
               }
             ]
           },
@@ -182,25 +182,25 @@
                 "type": "text",
                 "level": "span",
                 "label": "About Us",
-                "action": "navigate::to::company/about"
+                "action": "go::page::company/about"
               },
               {
                 "type": "text",
                 "level": "span",
                 "label": "Careers",
-                "action": "navigate::to::company/careers"
+                "action": "go::page::company/careers"
               },
               {
                 "type": "text",
                 "level": "span",
                 "label": "Blog",
-                "action": "navigate::to::company/blog"
+                "action": "go::page::company/blog"
               },
               {
                 "type": "text",
                 "level": "span",
                 "label": "Press",
-                "action": "navigate::to::company/press"
+                "action": "go::page::company/press"
               }
             ]
           },
@@ -211,25 +211,25 @@
                 "type": "text",
                 "level": "span",
                 "label": "Help Center",
-                "action": "navigate::to::support/help"
+                "action": "go::page::support/help"
               },
               {
                 "type": "text",
                 "level": "span",
                 "label": "Documentation",
-                "action": "navigate::to::support/docs"
+                "action": "go::page::support/docs"
               },
               {
                 "type": "text",
                 "level": "span",
                 "label": "Community Forum",
-                "action": "navigate::to::support/forum"
+                "action": "go::page::support/forum"
               },
               {
                 "type": "text",
                 "level": "span",
                 "label": "Report Issue",
-                "action": "navigate::to::support/report"
+                "action": "go::page::support/report"
               }
             ]
           },
@@ -240,19 +240,19 @@
                 "type": "text",
                 "level": "span",
                 "label": "Privacy Policy",
-                "action": "navigate::to::legal/privacy"
+                "action": "go::page::legal/privacy"
               },
               {
                 "type": "text",
                 "level": "span",
                 "label": "Terms of Service",
-                "action": "navigate::to::legal/terms"
+                "action": "go::page::legal/terms"
               },
               {
                 "type": "text",
                 "level": "span",
                 "label": "Cookie Policy",
-                "action": "navigate::to::legal/cookies"
+                "action": "go::page::legal/cookies"
               }
             ]
           },
@@ -338,7 +338,7 @@
         "subtitle": "Check out our featured products",
         "api": "/assets/data/products.json?page=1&size=9",
         "list": [],
-        "action": "navigate::to::product_detail"
+        "action": "go::page::product_detail"
       }
     },
     {
@@ -350,8 +350,9 @@
         "name": "",
         "description": "",
         "price": "",
+        "id" : "",
         "buyLabel": "Mua ngay",
-        "buyAction": "assets::js::action::buy_0"
+        "buyAction": "dom::classList.toggle::[data-id='props:id']::class_test"
       }
     },
     {
@@ -379,9 +380,9 @@
           }
         ],
         "submitLabel": "Sign In",
-        "submitAction": "navigate::to::home",
+        "submitAction": "go::page::home",
         "forgotLabel": "Forgot password?",
-        "forgotAction": "navigate::to::forgot-password_step1",
+        "forgotAction": "go::page::forgot-password_step1",
         "dividerLevel": "span",
         "dividerLabel": "Or",
         "buttons": [
@@ -401,7 +402,7 @@
         "prefixStyle": "",
         "navigateText": "Sign Up",
         "navigateStyle": "",
-        "navigateAction": "navigate::to::signup",
+        "navigateAction": "go::page::signup",
         "termsLabel": "Terms of use & Conditions"
       }
     },
@@ -436,12 +437,12 @@
           }
         ],
         "submitLabel": "Sign Up",
-        "submitAction": "navigate::to::home",
+        "submitAction": "go::page::home",
         "prefixText": "Already have an account?",
         "prefixStyle": "",
         "navigateText": "Sign In",
         "navigateStyle": "",
-        "navigateAction": "navigate::to::login"
+        "navigateAction": "go::page::login"
       }
     },
     {
@@ -463,12 +464,12 @@
         "btnAction": "alert::OTP sent to your email!",
         "btnButtonStyle": "",
         "submitLabel": "Reset Password",
-        "submitAction": "navigate::to::forgot-password_step2",
+        "submitAction": "go::page::forgot-password_step2",
         "prefixText": "Remember your password?",
         "prefixStyle": "",
         "navigateText": "Sign In",
         "navigateStyle": "",
-        "navigateAction": "navigate::to::login"
+        "navigateAction": "go::page::login"
       }
     },
     {
@@ -495,7 +496,7 @@
           }
         ],
         "submitLabel": "Reset Password",
-        "submitAction": "navigate::to::login"
+        "submitAction": "go::page::login"
       }
     },
     {
@@ -952,6 +953,7 @@
       "type": "custom_section",
       "layout": {
         "type": "card",
+        "id": "props:id",
         "children": [
           {
             "type": "custom_title_subtitle",
@@ -972,6 +974,7 @@
       "layout": {
         "type": "custom_section",
         "props": {
+          "id" : "props:id",
           "title": "props:title",
           "subtitle": "props:subtitle",
           "children": [
@@ -992,6 +995,7 @@
       "layout": {
         "type": "custom_section",
         "props": {
+          "id": "props:id",
           "title": "props:title",
           "subtitle": "props:subtitle",
           "children": [
@@ -1002,6 +1006,7 @@
                 {
                   "type": "image",
                   "src": "props:imageUrl",
+                  
                   "style": "width: 400px; height: auto; border-radius: 8px; object-fit: cover;"
                 },
                 {
