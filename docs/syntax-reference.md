@@ -12,7 +12,7 @@ Everything in a LuciaCore page is a **node**: a plain JSON object with a `type` 
 | `style` | string | Raw CSS declarations, scoped automatically to this node (`#id{ ...your css... }`). Supports nested `&:hover{}` / `&:active{}` and `@media(){}` blocks written inline. |
 | `label` | string | Visible text for `text` and `button`. Supports `[icon:Name]` tokens (see Icons below). |
 | `action` | string | What to run on click. See [actions.md](actions.md). |
-| `params` | object | Extra static data passed alongside `dataset` into the action. |
+| `params` | object | Extra static data merged alongside the node's `data-*` attributes into the action's `context`. |
 | `props` | object or string | Data available to this node and its children via `props:key` tokens. |
 | `content` | string or object | Name of a `contents` entry (or an inline object) whose `props` are merged in as defaults. |
 | `children` | array or string | Child nodes, or a `item:` / `props:` token that resolves to an array/object of nodes. |
