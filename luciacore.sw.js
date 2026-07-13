@@ -12,10 +12,8 @@
 
 const DYNAMIC_CACHE_NAME = 'lucia-dynamic-fortress-v1';
 
-// 🌟 Mảng lưu trữ động, cung cấp fallback phòng hờ khi chưa nhận được message
 let dynamicExtensions = ['.html', '.js', '.css', '.json', '.svg', '.png', '.jpg', '.jpeg'];
 
-// 🌟 Lắng nghe thông điệp từ Main Thread để cập nhật luật Cache
 self.addEventListener('message', (event) => {
     if (event.data && event.data.type === 'SYNC_EXTENSIONS') {
         dynamicExtensions = event.data.extensions;
@@ -24,7 +22,6 @@ self.addEventListener('message', (event) => {
 
 function isTargetAsset(url) {
     const isInternal = url.origin === self.location.origin;
-    // Sử dụng mảng động thay vì mảng cứng
     const hasTargetExt = dynamicExtensions.some(ext => url.pathname.endsWith(ext));
     const isRoot = url.pathname === '/';
     return isInternal && (hasTargetExt || isRoot);
@@ -63,15 +60,12 @@ self.addEventListener('fetch', (e) => {
                 return networkResponse;
             })
             .catch((err) => {
-                // 🌟 SỬA NÚT THẮT CHÍ MẠNG: Khối catch xử lý Realtime-Sync check version của main.js
                 if (e.request.headers.get('X-Fetch-Mode') === 'Realtime-Sync') {
                     return caches.open(DYNAMIC_CACHE_NAME).then((cache) => {
-                        // 🛠️ ÉP SO KHỚP CHUỖI TĨNH TRẦN TRỤI: Không truyền Request Object ảo, truyền thẳng String URL trọc!
                         const strictStaticKey = requestUrl.origin + '/content.json';
                         
                         return cache.match(strictStaticKey).then((cachedResponse) => {
                             if (cachedResponse) {
-                                console.log(`%c[Lucia SW] Bẫy Key tĩnh thành công! Nhả bọc cứu hộ cho content.json`, 'color: #00ff00;');
                                 return new Response(cachedResponse.body, {
                                     status: 503,
                                     statusText: 'Server Offline But Blueprint Attached',
@@ -83,7 +77,6 @@ self.addEventListener('fetch', (e) => {
                     });
                 }
 
-                // Luồng xử lý file tĩnh thông thường cứu mạng giao diện
                 return caches.match(cleanedRequest);
             })
     );
