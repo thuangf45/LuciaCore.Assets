@@ -85,10 +85,10 @@ Turn `debug` off (or omit it) for production; LuciaCore will instead poll for ch
 
 ## 5. Add more pages
 
-Add another object to the `pages` array and navigate to it with the built-in `navigate::to::` action:
+Add another object to the `pages` array and navigate to it with the built-in `go::page::` action:
 
 ```json
-{ "type": "button", "label": "Go to About", "action": "navigate::to::about" }
+{ "type": "button", "label": "Go to About", "action": "go::page::about" }
 ```
 
 ```json
