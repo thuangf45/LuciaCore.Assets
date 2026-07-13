@@ -23,7 +23,7 @@ This file covers the last two — the actual function contracts, file placement 
 
 1. Contains `|>` → pipeline.
 2. Contains `?=> :=>` → condition.
-3. Matches a system prefix (`navigate::to::`, `go::to::`, ...) → built-in handler.
+3. Matches a system prefix (`go::page::`, `go::to::`, `set::`, `get::`, `dom::`, ...) → built-in handler.
 4. Matches a name in the internal `ActionRegistry` (a small JS object inside the engine, kept for backward compatibility — not something you edit from `content.json`) → that handler.
 5. Otherwise, if it contains `::` → **treated as an action module.** LuciaCore turns the string into a file path and dynamically imports it.
 6. Otherwise → does nothing.
@@ -127,23 +127,22 @@ If the import fails (bad path, syntax error, missing `render` export used incorr
 
 ## Action module contract
 
-An action module must export an async function named **`execute`**:
+An action module must export an async function named **`execute`**, taking exactly two arguments:
 
 ```js
 // signature
-export async function execute(event, params) {
+export async function execute(event, context) {
   // do the work...
-  return someValue; // becomes `prev` for the next step in a pipeline
+  return someValue; // becomes `context.prev` for the next step in a pipeline
 }
 ```
 
 - `event` — the original DOM click event.
-- `dataset` — the clicked element's `data-*` attributes (as a plain object), automatically including `prev` if this module is called mid-pipeline.
-- `params` — the parsed `data-params` JSON object, if any.
+- `context` — one flat, merged object: the clicked element's `data-*` attributes plus the parsed `data-params` JSON, plus `prev` if this module is called mid-pipeline. There's no separate `dataset`/`params` split at runtime — everything you need is on `context`.
 
 ```js
 // /checkout/validate/form.js
-export async function execute(event, params) {
+export async function execute(event, context) {
   const email = document.querySelector("#login-email")?.value?.trim();
   const password = document.querySelector("#login-password")?.value?.trim();
 
@@ -165,12 +164,12 @@ Wire it into a node, optionally as one step of a pipeline:
 {
   "type": "button",
   "label": "Log in",
-  "action": "checkout::validate::form |> api::call |> navigate::to::home",
+  "action": "checkout::validate::form |> api::call |> go::page::home",
   "params": { "url": "/v1/api/login", "method": "POST" }
 }
 ```
 
-Return values chain: `checkout::validate::form`'s return becomes `dataset.prev` for the `api::call` step, and so on down the pipeline.
+Return values chain: `checkout::validate::form`'s return becomes `context.prev` for the `api::call` step, and so on down the pipeline.
 
 ## Choosing between a component and a module
 
