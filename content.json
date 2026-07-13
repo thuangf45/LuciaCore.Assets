@@ -1,8 +1,8 @@
 {
   "system": {
     "version": "2.2.1",
-    "debug": false,
-    "versionCheckInterval": 5000,
+    "debug": true,
+    "versionCheckInterval": 2000,
     "sw": {
       "enabled": true,
       "path": "luciacore.sw",
@@ -350,9 +350,9 @@
         "name": "",
         "description": "",
         "price": "",
-        "id" : "",
+        "id": "",
         "buyLabel": "Mua ngay",
-        "buyAction": "dom::classList.toggle::[data-id='props:id']::class_test"
+        "buyAction": "alert::Buying product with ID: props:id"
       }
     },
     {
@@ -368,7 +368,8 @@
             "inputType": "text",
             "icon": "[icon:Mail]",
             "style": "",
-            "inputStyle": ""
+            "inputStyle": "",
+            "id": "email"
           },
           {
             "label": "Password",
@@ -376,11 +377,12 @@
             "inputType": "password",
             "icon": "[icon:Lock]",
             "style": "",
-            "inputStyle": ""
+            "inputStyle": "",
+            "id": "password"
           }
         ],
         "submitLabel": "Sign In",
-        "submitAction": "go::page::home",
+        "submitAction": "set::context::url::/assets/data/accounts.json |> dom::gather::[data-id=login_form_body] |> api::call |> compute::prev.find(u => u.email == email && u.password == password) ?=> go::page::home :=> alert::Sai email: ${email} hoặc mật khẩu: ${password}",
         "forgotLabel": "Forgot password?",
         "forgotAction": "go::page::forgot-password_step1",
         "dividerLevel": "span",
@@ -626,6 +628,7 @@
       "type": "form",
       "layout": {
         "type": "card",
+        "id": "props:id",
         "position": "center",
         "style": "flex-grow: 0 !important; width: auto; min-width: 320px; height: auto; padding: 24px; gap: 16px; props:style;",
         "children": [
@@ -680,6 +683,7 @@
       "layout": {
         "type": "custom_input_icon",
         "props": {
+          "id": "props:id",
           "style": "props:style",
           "icon": "[icon:Search]",
           "placeholder": "props:placeholder",
@@ -711,6 +715,7 @@
           },
           {
             "type": "input",
+            "id": "props:id",
             "placeholder": "props:placeholder",
             "inputType": "props:inputType",
             "style": "padding: 10px 14px 10px 48px !important; props:inputStyle;"
@@ -729,6 +734,7 @@
             "props": {
               "style": "props:style",
               "icon": "props:icon",
+              "id": "props:id",
               "placeholder": "props:placeholder",
               "inputType": "props:inputType",
               "inputStyle": "props:inputStyle"
@@ -760,6 +766,7 @@
             "props": {
               "style": "item:style",
               "icon": "item:icon",
+              "id": "item:id",
               "placeholder": "item:placeholder",
               "inputType": "item:inputType",
               "inputStyle": "item:inputStyle"
@@ -974,7 +981,7 @@
       "layout": {
         "type": "custom_section",
         "props": {
-          "id" : "props:id",
+          "id": "props:id",
           "title": "props:title",
           "subtitle": "props:subtitle",
           "children": [
@@ -1006,7 +1013,6 @@
                 {
                   "type": "image",
                   "src": "props:imageUrl",
-                  
                   "style": "width: 400px; height: auto; border-radius: 8px; object-fit: cover;"
                 },
                 {
@@ -1077,8 +1083,8 @@
       "type": "custom_form_login",
       "layout": {
         "type": "form",
-        "id": "login_form_body",
         "props": {
+          "id": "login_form_body",
           "style": "min-width: 420px;",
           "topChildren": [
             {
@@ -1224,6 +1230,7 @@
               "props": {
                 "style": "props:iconStyle",
                 "icon": "props:icon",
+                "id": "props:id",
                 "placeholder": "props:placeholder",
                 "inputType": "props:inputType",
                 "inputStyle": "props:inputStyle"
