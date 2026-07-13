@@ -7,9 +7,9 @@ Think of it as a tiny "server-side rendered React" that runs entirely in the bro
 ## What LuciaCore does
 
 - **Renders pages from JSON.** Every page is a tree of nodes (`type`, `style`, `props`, `children`...). LuciaCore compiles that tree into HTML + scoped CSS.
-- **Routes between pages.** `navigate::to::pageName` switches pages instantly, with loading states, caching, and offline fallback built in.
+- **Routes between pages.** `go::page::pageName` switches pages instantly, with loading states, caching, and offline fallback built in.
 - **Binds live data.** Add `"api": "/your/endpoint"` to any node and LuciaCore fetches it, binds the result into `props`, and loops your `children` template over the results automatically.
-- **Handles clicks with a mini action language.** `data-action` strings like `go::mailto::support@example.com`, `storage::set::theme::dark`, or a whole pipeline like `validate |> api::call |> navigate::to::home` are parsed and executed by the engine — no click handlers to write.
+- **Handles clicks with a mini action language.** `data-action` strings like `go::mailto::support@example.com`, `set::storage::theme::dark`, or a whole pipeline like `validate |> api::call |> go::page::home` are parsed and executed by the engine — no click handlers to write.
 - **Lets you build reusable components.** Define a component once in `components`, then reuse it everywhere with different `props`, the same way you'd use a component in a JS framework — but in plain JSON.
 - **Works offline.** An optional Service Worker + cache layer keeps your last known `content.json` and assets available even with no network.
 
