@@ -131,7 +131,7 @@ An action module must export an async function named **`execute`**:
 
 ```js
 // signature
-export async function execute(event, dataset, params) {
+export async function execute(event, params) {
   // do the work...
   return someValue; // becomes `prev` for the next step in a pipeline
 }
@@ -143,7 +143,7 @@ export async function execute(event, dataset, params) {
 
 ```js
 // /checkout/validate/form.js
-export async function execute(event, dataset, params) {
+export async function execute(event, params) {
   const email = document.querySelector("#login-email")?.value?.trim();
   const password = document.querySelector("#login-password")?.value?.trim();
 
