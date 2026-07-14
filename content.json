@@ -55,16 +55,9 @@
       "name": "home",
       "loading": "loading",
       "layout": {
-        "type": "custom_page_layout",
+        "type": "custom_page",
+        "content": "template_page",
         "props": {
-          "header": {
-            "type": "custom_header",
-            "content": "template_header"
-          },
-          "footer": {
-            "type": "custom_footer",
-            "content": "template_footer"
-          },
           "pageContent": [
             {
               "type": "custom_section",
@@ -82,16 +75,9 @@
       "name": "product_detail",
       "loading": "loading",
       "layout": {
-        "type": "custom_page_layout",
+        "type": "custom_page",
+        "content": "template_page",
         "props": {
-          "header": {
-            "type": "custom_header",
-            "content": "template_header"
-          },
-          "footer": {
-            "type": "custom_footer",
-            "content": "template_footer"
-          },
           "pageContent": [
             {
               "type": "custom_product_detail_section",
@@ -112,6 +98,19 @@
     }
   ],
   "contents": [
+    {
+      "name" : "template_page",
+      "props" : {
+        "header": {
+          "type": "custom_header",
+          "content": "template_header"
+        },
+        "footer": {
+          "type": "custom_footer",
+          "content": "template_footer"
+        }
+      }
+    },
     {
       "name": "template_header",
       "props": {
@@ -1049,7 +1048,7 @@
       }
     },
     {
-      "type": "custom_page_layout",
+      "type": "custom_page",
       "layout": [
         {
           "type": "props:header"
