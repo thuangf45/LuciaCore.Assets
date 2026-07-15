@@ -57,10 +57,27 @@ Primitives render a concrete HTML element and never take `children`.
 | `input` | `<input>` | `inputType` (default `text`), `placeholder`, `value`, `disabled` |
 | `divider` | `<div>` separator | — |
 | `loading` | Built-in animated spinner | — |
+| `textarea` | `<textarea>` | `rows` (default `4`), `placeholder`, `value`, `disabled` |
+| `select` | `<select>` | `options` — array of `{ value, label }`, rendered as `<option>`s; `disabled` |
+| `checkbox` | `<input type="checkbox">` wrapped in a `<label>` | `label`, `checked`, `name` (useful for grouping) |
+| `radio` | `<input type="radio">` wrapped in a `<label>` | `label`, `checked`, `name` (required to form a radio group) |
+| `switch` | Toggle-styled `<input type="checkbox">` wrapped in a `<label>` | `label` (optional), `checked`, `name` |
+| `video` | `<video>` | `src`, `poster`, `autoplay`, `muted`, `loop`, `controls` (default `true`, set `false` to hide) |
+| `progress` | `<div>` progress bar | `value` — percentage `0`–`100` |
+| `badge` | `<span>` pill/tag | `label` |
+| `link` | `<a>` | `label`, `href` (defaults to `javascript:void(0)`), `target` |
+| `toast` | Dismissible notification card | `label` (title), `subLabel`, `toastType` (`info`/`success`/`warning`/`error`), `icon` (overrides the default `[icon:...]` per type). Usually you don't declare this node by hand — trigger it with `sys::toast::` (see [actions.md](actions.md)); the `id` it's given is what `sys::toast::close` targets. |
 
 ```json
 { "type": "text", "level": "h2", "label": "Welcome back" }
 { "type": "input", "inputType": "email", "placeholder": "you@example.com" }
+{ "type": "select", "options": [{ "value": "us", "label": "United States" }, { "value": "vn", "label": "Vietnam" }] }
+{ "type": "checkbox", "label": "Remember me", "name": "remember" }
+{ "type": "switch", "label": "Dark mode", "checked": true }
+{ "type": "video", "src": "/media/intro.mp4", "poster": "/media/intro-poster.jpg", "controls": true }
+{ "type": "progress", "value": 65 }
+{ "type": "badge", "label": "New" }
+{ "type": "link", "label": "Terms of Service", "href": "/terms", "target": "_blank" }
 ```
 
 ## Icons

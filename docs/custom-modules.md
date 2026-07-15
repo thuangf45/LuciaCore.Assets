@@ -23,7 +23,7 @@ This file covers the last two — the actual function contracts, file placement 
 
 1. Contains `|>` → pipeline.
 2. Contains `?=> :=>` → condition.
-3. Matches a system prefix (`go::page::`, `go::to::`, `set::`, `get::`, `dom::`, ...) → built-in handler.
+3. Matches a system prefix (`go::page::`, `go::to::`, `set::`, `get::`, `dom::`, `sys::`, ...) → built-in handler.
 4. Matches a name in the internal `ActionRegistry` (a small JS object inside the engine, kept for backward compatibility — not something you edit from `content.json`) → that handler.
 5. Otherwise, if it contains `::` → **treated as an action module.** LuciaCore turns the string into a file path and dynamically imports it.
 6. Otherwise → does nothing.

@@ -3,7 +3,7 @@
 Any node with an `action` field becomes clickable. LuciaCore attaches one global click listener and parses the `action` string to decide what to do — you never write `addEventListener` yourself.
 
 ```json
-{ "type": "button", "label": "Save", "action": "alert::Saved!" }
+{ "type": "button", "label": "Save", "action": "sys::alert::Saved!" }
 ```
 
 Every action receives, internally, the click `event` and a single unified **`context`** object: the node's `dataset` (its `data-*` attributes) merged together with anything you put in `params`. There's no separate `dataset`/`params` split at runtime — everything lands in one flat `context` object, and `context.prev` holds the previous step's result inside a pipeline. You won't need to touch this directly for built-in actions — it matters mainly for custom modules, `compute::`, and `${...}`.
@@ -14,32 +14,65 @@ These prefixes are recognized out of the box. Everything after the prefix is the
 
 | Action | Example | Effect |
 |---|---|---|
-| `go::page::` | `go::page::home` | Switch to another page (replaces the old `navigate::to::`). |
-| `go::to::` | `go::to::https://example.com` | Navigate the current tab to a URL. |
-| `go::new::` | `go::new::https://example.com` | Open a URL in a new tab. |
-| `go::replace::` | `go::replace::/checkout` | Replace the current URL (no back-button entry). |
-| `go::mailto::` | `go::mailto::support@example.com` | Open the user's mail client. |
-| `go::tel::` | `go::tel::+1234567890` | Open the user's phone dialer. |
-| `alert::` | `alert::Please fill the form` | Browser `alert()`. |
-| `console::` | `console::warn::Low stock` | Logs to console (`log`, `warn`, `error`...). Defaults to `log` if no type given. |
+| `go::` | see below | Navigation: switch pages, load a URL, open a new tab, replace the URL, open mail/dialer apps. |
+| `sys::` | see below | System utilities: `alert`, `console`, and `toast` (replaces the old standalone `alert::`/`console::` prefixes). |
 | `scroll::to::` | `scroll::to::#pricing` | Smooth-scroll to a CSS selector. |
 | `download::url::` | `download::url::/files/invoice.pdf` | Trigger a file download. |
 | `dom::` | see below | Generic DOM read/write, plus two helper sub-actions (`gather`, `el`). |
 | `get::` | see below | Read from `context`, `localStorage`, `sessionStorage`, or the clipboard. |
 | `set::` | see below | Write to (or clear) `context`, `localStorage`, `sessionStorage`, or the clipboard. |
-| `wait::` | `wait::500` or `wait::500::alert::Done` | Pause, optionally then run another action. |
+| `wait::` | `wait::500` or `wait::500::sys::alert::Done` | Pause, optionally then run another action. |
 | `compute::` | `compute::price * qty` | Evaluate a JS expression against `context`, returns the result. |
 | `api::call` | `"action": "api::call", "params": { "url": "...", "method": "POST", "body": {...} }` | Fire an HTTP request. See below. |
 
-> **Migration note:** `navigate::to::`, `storage::set::`/`storage::get::`/`storage::remove::`, and `copy::text::` no longer exist as their own prefixes. Use `go::page::`, `set::storage::`/`get::storage::`, and `set::clipboard::` instead (all covered below).
+> **Migration note:** `navigate::to::`, `storage::set::`/`storage::get::`/`storage::remove::`, and `copy::text::` no longer exist as their own prefixes. Use `go::page::`, `set::storage::`/`get::storage::`, and `set::clipboard::` instead (all covered below). Likewise, the standalone `alert::` and `console::` prefixes have been retired — they're now consolidated under `sys::alert::` and `sys::console::` (see below), alongside the new `sys::toast::`.
 
-### `go::page::` (page navigation)
+### `go::` (navigation)
+
+| Action | Example | Effect |
+|---|---|---|
+| `go::page::` | `go::page::home` | Switch to another page (replaces the old `navigate::to::`), carrying the current `context` along as the target page's props. |
+| `go::to::` | `go::to::https://example.com` | Navigate the current tab to a URL. |
+| `go::new::` | `go::new::https://example.com` | Open a URL in a new tab. |
+| `go::replace::` | `go::replace::/checkout` | Replace the current URL (no back-button entry). |
+| `go::mailto::` | `go::mailto::support@example.com` | Open the user's mail client. |
+| `go::tel::` | `go::tel::+1234567890` | Open the user's phone dialer. |
 
 ```json
 { "type": "button", "label": "Go home", "action": "go::page::home" }
 ```
 
-Same behavior as the old `navigate::to::`: switches the active page and carries the current `context` along as the target page's props.
+### `sys::` (alert, console, toast)
+
+`sys::` groups small "system utility" actions that used to be separate top-level prefixes.
+
+```
+sys::alert::message
+sys::console::message
+sys::console::type::message
+sys::toast::message
+sys::toast::type::message
+sys::toast::type::durationMs::message
+sys::toast::close
+sys::toast::clear
+```
+
+| Example | Effect |
+|---|---|
+| `sys::alert::Please fill the form` | Browser `alert()`. |
+| `sys::console::Low stock` | `console.log("[LuciaCore Sys]", "Low stock")`. |
+| `sys::console::warn::Low stock` | Logs with the given level: `log`, `warn`, `error`, `info`, or `table`. Defaults to `log` if no recognized type is given. |
+| `sys::toast::Saved successfully` | Shows an `info` toast for the default 5000ms. |
+| `sys::toast::success::Saved successfully` | Shows a toast styled as `success`, `error`, `warning`, or `info`, default duration. |
+| `sys::toast::success::2000::Saved successfully` | Same, but auto-dismisses after `2000`ms instead of the default. |
+| `sys::toast::close` | Closes the toast the click originated from (e.g. a close button inside the toast itself). |
+| `sys::toast::clear` | Removes every currently visible toast. |
+
+Notes:
+
+- For `sys::toast::`, LuciaCore looks at the second segment: if it's one of `success`/`error`/`warning`/`info`, that's the toast type; if it's a number, that's the duration; otherwise everything is treated as the message. You can combine type and duration (`type::durationMs::message`) or provide neither and just pass the message directly.
+- Toasts render using the built-in `toast` primitive by default. A page can point `sys::toast::` at a custom component instead by setting `"toast": "custom_my_toast"` on that page's entry in `pages` (see [content-json.md](content-json.md#pages)).
+- `sys::` actions work inside pipelines and conditions like any other system action, e.g. `wait::250::sys::toast::success::2000::Login successful! |> go::page::home`.
 
 ### `dom::` (generic DOM actions)
 
@@ -133,7 +166,7 @@ Steps run one after another and wait for each to finish (`wait::` and `api::call
 `condition?=>actionIfTrue:=>actionIfFalse` runs one of two actions based on a condition:
 
 ```json
-"action": "compute::password.length >= 8 ?=> go::page::home:=>alert::Password too short"
+"action": "compute::password.length >= 8 ?=> go::page::home:=>sys::alert::Password too short"
 ```
 
 The condition itself can use a comparison operator directly, comparing the result of an action on the left against a literal on the right:
@@ -149,7 +182,7 @@ Supported operators: `===`, `!==`, `==`, `!=`, `>=`, `<=`, `>`, `<`. If no opera
 Anywhere in an action string, `${expression}` is evaluated against the current `context` (which includes `prev` from a pipeline, and any `params`/`data-*` you set):
 
 ```json
-"action": "console::log::Total is ${price * qty}"
+"action": "sys::console::log::Total is ${price * qty}"
 ```
 
 ## Custom action modules

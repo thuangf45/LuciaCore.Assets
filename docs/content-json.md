@@ -57,6 +57,7 @@ An array of routes. Each page is:
 |---|---|
 | `name` | Route identifier. Navigate to it with `go::page::home`. |
 | `loading` | (optional) The `type` of a node to show while this page compiles. Defaults to the built-in `loading` spinner. |
+| `toast` | (optional) The `type` of a component to use for `sys::toast::` notifications triggered while this page is active. Defaults to the built-in `toast` primitive. Point it at your own component in `components` to fully re-skin toasts per page. |
 | `layout` | The root node of the page — see [syntax-reference.md](syntax-reference.md) for everything a node can contain. |
 
 The first page in the array is used as the fallback home route. A page named `"offline"` (if present) is shown automatically when the app cannot reach the server.
