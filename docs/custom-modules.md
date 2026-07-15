@@ -16,7 +16,7 @@ This file covers the last two — the actual function contracts, file placement 
 
 1. Does it match a name in `components`? → expand that component's `layout`.
 2. Does it match a built-in layout (`row`, `column`, `grid`, `card`)? → built-in renderer.
-3. Does it match a built-in primitive (`button`, `text`, `image`, `input`, `divider`, `loading`)? → built-in renderer.
+3. Does it match a built-in primitive (`button`, `text`, `image`, `input`, `divider`, `loading`, `textarea`, `select`, `checkbox`, `radio`, `switch`, `video`, `progress`, `badge`, `link`, `toast`)? → built-in renderer.
 4. Otherwise → **treated as a render module.** LuciaCore turns the type into a file path and dynamically imports it.
 
 **For `action`** (in `dispatchActionAsync`), in order:

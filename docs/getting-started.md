@@ -57,7 +57,7 @@ That's the only HTML you will ever write.
         "style": "padding: 40px; gap: 16px; align-items: center;",
         "children": [
           { "type": "text", "level": "h1", "label": "Hello LuciaCore" },
-          { "type": "button", "label": "Click me", "action": "alert::It works!" }
+          { "type": "button", "label": "Click me", "action": "sys::alert::It works!" }
         ]
       }
     }
