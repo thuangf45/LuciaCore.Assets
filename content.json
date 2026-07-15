@@ -381,7 +381,7 @@
           }
         ],
         "submitLabel": "Sign In",
-        "submitAction": "wait::250::sys::toast::success::2000::Login successful! |> go::page::home",
+        "submitAction": "sys::toast::success::3000::Login successful! |> go::page::home",
         "forgotLabel": "Forgot password?",
         "forgotAction": "go::page::forgot-password_step1",
         "dividerLevel": "span",
