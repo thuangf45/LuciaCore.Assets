@@ -99,8 +99,8 @@
   ],
   "contents": [
     {
-      "name" : "template_page",
-      "props" : {
+      "name": "template_page",
+      "props": {
         "header": {
           "type": "custom_header",
           "content": "template_header"
@@ -381,7 +381,7 @@
           }
         ],
         "submitLabel": "Sign In",
-        "submitAction": "go::page::home",
+        "submitAction": "wait::250::sys::toast::success::2000::Login successful! |> go::page::home",
         "forgotLabel": "Forgot password?",
         "forgotAction": "go::page::forgot-password_step1",
         "dividerLevel": "span",
