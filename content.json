@@ -309,7 +309,7 @@
                 "type": "text",
                 "level": "span",
                 "label": "[icon:Brand:Youtube] YouTube",
-                "action": "alert::Welcome ytb |> go::new::https://www.youtube.com"
+                "action": "sys::toast::Go to YouTube |> wait::300 |> go::new::https://www.youtube.com"
               }
             ]
           }
@@ -351,7 +351,7 @@
         "price": "",
         "id": "",
         "buyLabel": "Mua ngay",
-        "buyAction": "alert::Buying product with ID: props:id"
+        "buyAction": "sys::toast::success::3000::Buying product with ID: props:id"
       }
     },
     {
@@ -389,12 +389,12 @@
         "buttons": [
           {
             "label": "[icon:Brand:Google] Google",
-            "action": "alert::Login with Google",
+            "action": "sys::toast::success::3000::Login with Google |> go::page::home",
             "style": ""
           },
           {
             "label": "[icon:Brand:Apple] Apple",
-            "action": "alert::Login with Apple",
+            "action": "sys::toast::success::3000::Login with Apple |> go::page::home",
             "style": ""
           }
         ],
@@ -462,7 +462,7 @@
         "btnInputType": "text",
         "btnInputStyle": "",
         "btnLabel": "Get OTP",
-        "btnAction": "alert::OTP sent to your email!",
+        "btnAction": "sys::toast::OTP sent to your email!",
         "btnButtonStyle": "",
         "submitLabel": "Reset Password",
         "submitAction": "go::page::forgot-password_step2",
