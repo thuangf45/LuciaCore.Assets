@@ -16,7 +16,6 @@ These prefixes are recognized out of the box. Everything after the prefix is the
 |---|---|---|
 | `go::` | see below | Navigation: switch pages, load a URL, open a new tab, replace the URL, open mail/dialer apps. |
 | `sys::` | see below | System utilities: `alert`, `console`, and `toast` (replaces the old standalone `alert::`/`console::` prefixes). |
-| `scroll::to::` | `scroll::to::#pricing` | Smooth-scroll to a CSS selector. |
 | `download::url::` | `download::url::/files/invoice.pdf` | Trigger a file download. |
 | `dom::` | see below | Generic DOM read/write, plus two helper sub-actions (`gather`, `el`). |
 | `get::` | see below | Read from `context`, `localStorage`, `sessionStorage`, or the clipboard. |
