@@ -21,15 +21,16 @@ self.addEventListener('message', (event) => {
 });
 
 function isTargetAsset(url) {
-    const isInternal = url.origin === self.location.origin;
+    // const isInternal = url.origin === self.location.origin;
     const hasTargetExt = dynamicExtensions.some(ext => url.pathname.endsWith(ext));
     const isRoot = url.pathname === '/';
-    return isInternal && (hasTargetExt || isRoot);
+    return hasTargetExt || isRoot;
 }
 
 function cleanCacheKey(request) {
     const url = new URL(request.url);
-    if (url.pathname.endsWith('content.json')) {
+    const hasTargetExt = dynamicExtensions.some(ext => url.pathname.endsWith(ext));
+    if (hasTargetExt) {
         return new Request(url.origin + url.pathname);
     }
     return request;
@@ -63,7 +64,7 @@ self.addEventListener('fetch', (e) => {
                 if (e.request.headers.get('X-Fetch-Mode') === 'Realtime-Sync') {
                     return caches.open(DYNAMIC_CACHE_NAME).then((cache) => {
                         const strictStaticKey = requestUrl.origin + '/content.json';
-                        
+
                         return cache.match(strictStaticKey).then((cachedResponse) => {
                             if (cachedResponse) {
                                 return new Response(cachedResponse.body, {
