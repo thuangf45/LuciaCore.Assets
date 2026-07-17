@@ -108,6 +108,10 @@
         "footer": {
           "type": "custom_footer",
           "content": "template_footer"
+        },
+        "sidebar": {
+          "type": "custom_sidebar",
+          "content": "template_sidebar"
         }
       }
     },
@@ -115,7 +119,8 @@
       "name": "template_header",
       "props": {
         "src": "https://picsum.photos/id/1005/100/100",
-        "action": "go::page::home",
+        "title": "LuciaCore",
+        "action": "",
         "placeholder": "Search...",
         "list": [
           {
@@ -317,6 +322,38 @@
       }
     },
     {
+      "name": "template_sidebar",
+      "props": {
+        "list": [
+          {
+            "icon": "[icon:Home]",
+            "label": "Home",
+            "action": "go::page::home"
+          },
+          {
+            "icon": "[icon:Box]",
+            "label": "Products",
+            "action": "go::page::products"
+          },
+          {
+            "icon": "[icon:Shopping-Cart]",
+            "label": "Orders",
+            "action": "go::page::orders"
+          },
+          {
+            "icon": "[icon:Chart-Bar]",
+            "label": "Analytics",
+            "action": "go::page::analytics"
+          },
+          {
+            "icon": "[icon:Settings]",
+            "label": "Settings",
+            "action": "go::page::settings"
+          }
+        ]
+      }
+    },
+    {
       "name": "home_hero_content",
       "props": {
         "title": "Welcome to the home",
@@ -335,7 +372,7 @@
       "props": {
         "title": "Featured Products",
         "subtitle": "Check out our featured products",
-        "api": "/assets/data/products.json?page=1&size=9",
+        "api": "/assets/data/products.json?page=1&size=8",
         "list": [],
         "action": "go::page::product_detail"
       }
@@ -887,18 +924,18 @@
                 "style": "width: 36px; height: 36px; border-radius: 8px; object-fit: cover;"
               },
               {
-                "type": "custom_search_input",
-                "props": {
-                  "style": "display: none; @media (max-width: 1024px) { display: flex !important; };",
-                  "placeholder": "props:placeholder"
-                }
+                "type": "text",
+                "level": "h2",
+                "label": "props:title",
+                "style": "font-size: 1.25rem; font-weight: 600;"
               }
+              
             ]
           },
           "center": {
             "type": "custom_search_input",
             "props": {
-              "style": "@media (max-width: 1024px) { display: none !important; };",
+              "style": "@media (max-width: 768px) { display: none !important; };",
               "placeholder": "props:placeholder"
             }
           },
@@ -975,6 +1012,38 @@
       }
     },
     {
+      "type": "custom_sidebar",
+      "layout": {
+        "type": "column",
+        "style": "padding: 24px; display: block;",
+        "children": [
+          {
+            "type": "column",
+            "loop": "props:list",
+            "children": [
+              {
+                "type": "row",
+                "style": "padding: 10px; gap: 12px; &:hover{background-color: #f0f0f0; border-radius: 4px; cursor: pointer;};",
+                "action": "item:action",
+                "children": [
+                  {
+                    "type": "text",
+                    "label": "item:icon",
+                    "style": "font-size: 1.3rem;"
+                  },
+                  {
+                    "type": "text",
+                    "label": "item:label",
+                    "style": "font-weight: 600;"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
       "type": "custom_product_grid_section",
       "layout": {
         "type": "custom_section",
@@ -1006,16 +1075,16 @@
           "children": [
             {
               "type": "row",
-              "style": "gap: 24px; flex-wrap: wrap;",
+              "style": "gap: 24px; flex-wrap: wrap; @media(max-width: 768px){ flex-direction: column; align-items: center; };",
               "children": [
                 {
                   "type": "image",
                   "src": "props:imageUrl",
-                  "style": "width: 400px; height: auto; border-radius: 8px; object-fit: cover;"
+                  "style": "width: 560px; height: auto; border-radius: 8px; object-fit: cover;"
                 },
                 {
                   "type": "column",
-                  "style": "gap: 12px; max-width: 400px;",
+                  "style": "gap: 12px; width: 100%; @media(max-width: 768px){ align-items: center; text-align: center; };",
                   "children": [
                     {
                       "type": "text",
@@ -1054,23 +1123,34 @@
           "type": "props:header"
         },
         {
-          "type": "props:sidebar"
-        },
-        {
-          "type": "column",
-          "style": "background-color: #f0f2f5; gap:24px; padding: 24px 240px; @media(max-width: 1024px){padding:24px 0 !important;};",
-          "loop": "props:pageContent",
+          "type": "row",
+          "style": "align-items: flex-start;",
           "children": [
             {
-              "type": "item:type",
-              "content": "item:content",
-              "props": "item:props",
-              "api": "item:api"
+              "type": "column",
+              "position": "sticky",
+              "id": "global_main_sidebar",
+              "style": "flex-basis: auto; min-width: 240px; max-width: 240px; top: 56px; height: calc(100vh - 56px); overflow-y: auto; @media(max-width: 1024px){ display: none; };",
+              "children": [
+                {
+                  "type": "props:sidebar"
+                }
+              ]
+            },
+            {
+              "type": "column",
+              "style": " gap:24px; padding: 24px 40px;",
+              "loop": "props:pageContent",
+              "children": [
+                {
+                  "type": "item:type",
+                  "content": "item:content",
+                  "props": "item:props",
+                  "api": "item:api"
+                }
+              ]
             }
           ]
-        },
-        {
-          "type": "props:extra"
         },
         {
           "type": "props:footer"
