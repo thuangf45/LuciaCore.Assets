@@ -82,7 +82,76 @@
             {
               "type": "custom_product_detail_section",
               "content": "product_detail_content",
-              "api": "/assets/data/products.json?filter=id=props:id"
+              "api": "/assets/data/products/products.json?filter=id=props:id",
+              "skeleton": {
+                "width": "100%",
+                "height": 120,
+                "minItems": 20
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "products",
+      "loading": "loading",
+      "layout": {
+        "type": "custom_page",
+        "content": "template_page",
+        "props": {
+          "pageContent": [
+            {
+              "type": "custom_section",
+              "content": "home_hero_content"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "orders",
+      "loading": "loading",
+      "layout": {
+        "type": "custom_page",
+        "content": "template_page",
+        "props": {
+          "pageContent": [
+            {
+              "type": "custom_section",
+              "content": "home_hero_content"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "analytics",
+      "loading": "loading",
+      "layout": {
+        "type": "custom_page",
+        "content": "template_page",
+        "props": {
+          "pageContent": [
+            {
+              "type": "custom_section",
+              "content": "home_hero_content"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "settings",
+      "loading": "loading",
+      "layout": {
+        "type": "custom_page",
+        "content": "template_page",
+        "props": {
+          "pageContent": [
+            {
+              "type": "custom_section",
+              "content": "home_hero_content"
             }
           ]
         }
@@ -124,6 +193,11 @@
         "placeholder": "Search...",
         "list": [
           {
+            "label": "[icon:Category]",
+            "action": "go::page::home",
+            "style": ""
+          },
+          {
             "label": "[icon:Message-Circle]",
             "action": "go::page::home",
             "style": ""
@@ -131,11 +205,6 @@
           {
             "label": "[icon:Bell]",
             "action": "go::page::inventory",
-            "style": ""
-          },
-          {
-            "label": "[icon:Shopping-Cart]",
-            "action": "go::page::home",
             "style": ""
           },
           {
@@ -372,7 +441,7 @@
       "props": {
         "title": "Featured Products",
         "subtitle": "Check out our featured products",
-        "api": "/assets/data/products.json?page=1&size=8",
+        "api": "/assets/data/products/products.json?page=1&size=8",
         "list": [],
         "action": "go::page::product_detail"
       }
@@ -387,7 +456,9 @@
         "description": "",
         "price": "",
         "id": "",
-        "buyLabel": "Mua ngay",
+        "addToCartLabel": "Add to Cart",
+        "addToCartAction": "sys::toast::success::3000::Product added to cart!",
+        "buyLabel": "Buy",
         "buyAction": "sys::toast::success::3000::Buying product with ID: props:id"
       }
     },
@@ -927,9 +998,8 @@
                 "type": "text",
                 "level": "h2",
                 "label": "props:title",
-                "style": "font-size: 1.25rem; font-weight: 600;"
+                "style": "font-size: 1.25rem; font-weight: 600; word-break: normal;"
               }
-              
             ]
           },
           "center": {
@@ -1055,6 +1125,11 @@
             {
               "type": "custom_product_grid",
               "api": "props:api",
+              "skeleton": {
+                "width": "100%",
+                "height": 120,
+                "minItems": 10
+              },
               "props": {
                 "list": "props:list",
                 "action": "props:action"
@@ -1075,16 +1150,16 @@
           "children": [
             {
               "type": "row",
-              "style": "gap: 24px; flex-wrap: wrap; @media(max-width: 768px){ flex-direction: column; align-items: center; };",
+              "style": "gap: 48px; @media(max-width: 768px){ flex-direction: column; gap: 24px; };",
               "children": [
                 {
                   "type": "image",
                   "src": "props:imageUrl",
-                  "style": "width: 560px; height: auto; border-radius: 8px; object-fit: cover;"
+                  "style": "width: 560px; aspect-ratio: 3 / 2; border-radius: 8px; object-fit: cover; @media(max-width: 1200px){ width: 400px; };"
                 },
                 {
                   "type": "column",
-                  "style": "gap: 12px; width: 100%; @media(max-width: 768px){ align-items: center; text-align: center; };",
+                  "style": "gap: 6px; width: 100%; ",
                   "children": [
                     {
                       "type": "text",
@@ -1094,6 +1169,7 @@
                     {
                       "type": "text",
                       "level": "p",
+                      "style": "word-break: normal;",
                       "label": "props:description"
                     },
                     {
@@ -1103,10 +1179,22 @@
                       "style": "color:red;"
                     },
                     {
-                      "type": "button",
-                      "label": "props:buyLabel",
-                      "price": "props:price",
-                      "action": "props:buyAction"
+                      "type": "row",
+                      "style": "gap: 12px; @media(max-width: 768px){  justify-content: right; }; ",
+                      "children": [
+                        {
+                          "type": "button",
+                          "style": "word-break: normal; @media(min-width: 768px){ width: 200px; };",
+                          "label": "props:buyLabel",
+                          "action": "props:buyAction"
+                        },
+                        {
+                          "type": "button",
+                          "style": "word-break: normal;  @media(min-width: 768px){ width: 200px };",
+                          "label": "props:addToCartLabel",
+                          "action": "props:addToCartAction"
+                        }
+                      ]
                     }
                   ]
                 }
@@ -1146,7 +1234,8 @@
                   "type": "item:type",
                   "content": "item:content",
                   "props": "item:props",
-                  "api": "item:api"
+                  "api": "item:api",
+                  "skeleton": "item:skeleton"
                 }
               ]
             }
