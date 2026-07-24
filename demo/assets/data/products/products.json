@@ -1,0 +1,122 @@
+[
+  {
+    "id": "sp001",
+    "name": "Apple iPhone 15 128GB",
+    "description" : "Smartphone Apple iPhone 15 128GB with A17 Bionic chip, 6.1-inch Super Retina XDR display, dual-camera system, and iOS 17 for a seamless user experience.",
+    "price": "$189",
+    "stock": 25,
+    "rating": 4.8,
+    "category": "Điện thoại",
+    "badgeLabel": "New",
+    "brand": "Apple",
+    "imageUrl": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600"
+  },
+  {
+    "id": "sp002",
+    "name": "Samsung Galaxy S25 256GB",
+    "description" : "Smartphone Samsung Galaxy S25 256GB with Exynos 2400 chip, 6.7-inch Dynamic AMOLED display, triple-camera system, and Android 13 for a seamless user experience.",
+    "price": "$219",
+    "stock": 18,
+    "rating": 4.7,
+    "category": "Điện thoại",
+    "badgeLabel": "Hot",
+    "brand": "Samsung",
+    "imageUrl": "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=600"
+  },
+  {
+    "id": "sp003",
+    "name": "MacBook Air M4 13 inch",
+    "description" : "Laptop Apple MacBook Air M4 13 inch with M4 chip, Retina display, and macOS for a seamless computing experience.",
+    "price": "$299",
+    "stock": 12,
+    "rating": 4.9,
+    "category": "Laptop",
+    "badgeLabel": "New",
+    "brand": "Apple",
+    "imageUrl": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    "id": "sp004",
+    "name": "Dell XPS 13",
+    "description" : "Laptop Dell XPS 13 with Intel Core i7 processor, 13.4-inch FHD+ display, and Windows 11 for a seamless computing experience.",
+    "price": "$269",
+    "stock": 8,
+    "rating": 4.6,
+    "category": "Laptop",
+    "badgeLabel": "Hot",
+    "brand": "Dell",
+    "imageUrl": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600"
+  },
+  {
+    "id": "sp005",
+    "name": "Sony WH-1000XM5",
+    "description" : "Wireless noise-canceling headphones from Sony with advanced audio technology and long battery life.",
+    "price": "$79",
+    "stock": 35,
+    "rating": 4.8,
+    "category": "Tai nghe",
+    "badgeLabel": "Best Seller",
+    "brand": "Sony",
+    "imageUrl": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600"
+  },
+  {
+    "id": "sp006",
+    "name": "AirPods Pro Gen 2",
+    "description" : "Wireless earbuds from Apple with active noise cancellation, transparency mode, and spatial audio for an immersive listening experience.",
+    "price": "$59",
+    "stock": 42,
+    "rating": 4.7,
+    "category": "Tai nghe",
+    "badgeLabel": "New",
+    "brand": "Apple",
+    "imageUrl": "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=600"
+  },
+  {
+    "id": "sp007",
+    "name": "iPad Air M3",
+    "description" : "Tablet Apple iPad Air M3 with M3 chip, 10.9-inch Liquid Retina display, and iPadOS for a seamless user experience.",
+    "price": "$179",
+    "stock": 20,
+    "rating": 4.8,
+    "category": "Tablet",
+    "badgeLabel": "New",
+    "brand": "Apple",
+    "imageUrl": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600"
+  },
+  {
+    "id": "sp008",
+    "name": "Samsung Galaxy Tab S10",
+    "description" : "Tablet Samsung Galaxy Tab S10 with Exynos 2400 chip, 11-inch AMOLED display, and Android 13 for a seamless user experience.",
+    "price": "$159",
+    "stock": 14,
+    "rating": 4.6,
+    "category": "Tablet",
+    "badgeLabel": "Hot",
+    "brand": "Samsung",
+    "imageUrl": "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=600"
+  },
+  {
+    "id": "sp009",
+    "name": "Logitech MX Master 3S",
+    "description" : "Wireless mouse from Logitech with ergonomic design, customizable buttons, and advanced tracking for a seamless computing experience.",
+    "price": "$249",
+    "stock": 60,
+    "rating": 4.9,
+    "category": "Phụ kiện",
+    "badgeLabel": "Best Seller",
+    "brand": "Logitech",
+    "imageUrl": "https://images.unsplash.com/photo-1527814050087-3793815479db?w=600"
+  },
+  {
+    "id": "sp010",
+    "name": "LG UltraWide 34 inch",
+    "description" : "Monitor LG UltraWide 34 inch with IPS panel, 3440x1440 resolution, and HDR support for a seamless viewing experience.",
+    "price": "$109",
+    "stock": 9,
+    "rating": 4.7,
+    "category": "Màn hình",
+    "badgeLabel": "New",
+    "brand": "LG",
+    "imageUrl": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600"
+  }
+]

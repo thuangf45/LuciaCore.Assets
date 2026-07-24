@@ -86,7 +86,7 @@
               "skeleton": {
                 "width": "100%",
                 "height": 120,
-                "minItems": 20
+                "minItems": 15
               }
             }
           ]
@@ -443,6 +443,7 @@
         "subtitle": "Check out our featured products",
         "api": "/assets/data/products/products.json?page=1&size=8",
         "list": [],
+        "link": "Buy Now [icon:Shopping-Cart]",
         "action": "go::page::product_detail"
       }
     },
@@ -458,7 +459,7 @@
         "id": "",
         "addToCartLabel": "Add to Cart",
         "addToCartAction": "sys::toast::success::3000::Product added to cart!",
-        "buyLabel": "Buy",
+        "buyLabel": "Buy with Voucher",
         "buyAction": "sys::toast::success::3000::Buying product with ID: props:id"
       }
     },
@@ -947,30 +948,59 @@
           {
             "type": "card",
             "id": "item:id",
-            "style": "border: 1px solid #e5e7eb; padding: 16px; border-radius: 8px; min-width: 240px;",
+            "style": "padding: 16px; gap: 6px;",
             "action": "props:action",
             "children": [
               {
                 "type": "image",
                 "src": "item:imageUrl",
-                "style": "width:100%; aspect-ratio: 16 / 9;"
+                "style": "aspect-ratio: 16 / 9;"
               },
               {
                 "type": "text",
-                "level": "h3",
+                "level": "p",
+                "style": "font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;",
                 "label": "item:name"
               },
               {
                 "type": "row",
-                "style": "justify-content: space-between; align-items: center;",
+                "style": "gap: 8px; justify-content: flex-start;",
                 "children": [
                   {
                     "type": "text",
-                    "level": "p",
-                    "label": "item:price",
-                    "style": "color:red;"
+                    "level": "span",
+                    "style": "text-decoration: line-through;",
+                    "label": "item:price"
+                  },
+                  {
+                    "type": "badge",
+                    "label": "item:rating",
+                    "style": "background-color: #FBBF24; color: black;"
+                  },
+                  {
+                    "type": "badge",
+                    "label": "item:badgeLabel",
+                    "style": "background-color: #EF4444; color: white;"
                   }
                 ]
+              },
+              {
+                "type": "row3",
+                "props": {
+                  "style": "",
+                  "left": {
+                    "type": "text",
+                    "level": "h3",
+                    "style": "color: #EF4444;",
+                    "label": "item:price"
+                  },
+                  "center": {},
+                  "right": {
+                    "type": "link",
+                    "label": "props:link",
+                    "style": "color: #1877F2; white-space: nowrap;"
+                  }
+                }
               }
             ]
           }
@@ -1155,7 +1185,7 @@
                 {
                   "type": "image",
                   "src": "props:imageUrl",
-                  "style": "width: 560px; aspect-ratio: 3 / 2; border-radius: 8px; object-fit: cover; @media(max-width: 1200px){ width: 400px; };"
+                  "style": "width: 560px; aspect-ratio: 3 / 2; border-radius: 8px; @media(max-width: 1200px){ width: 400px; };"
                 },
                 {
                   "type": "column",
@@ -1184,15 +1214,15 @@
                       "children": [
                         {
                           "type": "button",
-                          "style": "word-break: normal; @media(min-width: 768px){ width: 200px; };",
-                          "label": "props:buyLabel",
-                          "action": "props:buyAction"
-                        },
-                        {
-                          "type": "button",
                           "style": "word-break: normal;  @media(min-width: 768px){ width: 200px };",
                           "label": "props:addToCartLabel",
                           "action": "props:addToCartAction"
+                        },
+                        {
+                          "type": "button",
+                          "style": "word-break: normal; @media(min-width: 768px){ width: 200px; };",
+                          "label": "props:buyLabel",
+                          "action": "props:buyAction"
                         }
                       ]
                     }
