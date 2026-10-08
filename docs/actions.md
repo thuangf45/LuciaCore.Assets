@@ -8,6 +8,35 @@ Any node with an `action` field becomes clickable. LuciaCore attaches one global
 
 Every action receives, internally, the click `event` and a single unified **`context`** object: the node's `dataset` (its `data-*` attributes) merged together with anything you put in `params`. There's no separate `dataset`/`params` split at runtime — everything lands in one flat `context` object, and `context.prev` holds the previous step's result inside a pipeline. You won't need to touch this directly for built-in actions — it matters mainly for custom modules, `compute::`, and `${...}`.
 
+## Interaction & Gesture Triggers
+
+Beyond the standard click `action`, LuciaCore supports declarative physical interaction triggers directly on any node. All triggers route through the same unified `dispatchActionAsync` execution pipeline (supporting pipelines `|>`, conditions `?=>`, API calls, and modules).
+
+| Trigger Field | Event Lifecycle | Context Injected Variables | Typical Use Case |
+|---|---|---|---|
+| `action` | Click (press & release) | Standard `context` | Navigation, button submission, dialog toggle. |
+| `drag` | Drag & Drop | `finalX`, `finalY`, `deltaX`, `deltaY` | Draggable widgets, cards, canvas elements. (Use `""` or `"true"` for pure drag without drop action). |
+| `hold` | Long press (>500ms) | Standard `context` | Voice recording start, 2x playback speed, context menus. |
+| `release` | Released after `hold` | Standard `context` | Voice send, reset playback speed back to 1x, dismiss preview. |
+| `double` | Double click / Double tap (<250ms) | Standard `context` | Like/heart item, zoom image, quick edit. |
+| `swipe` | Quick flick (<250ms, >30px) | `direction` (`left`, `right`, `up`, `down`) | Carousels, swipe-to-delete, mobile drawer open. |
+| `hover` | Mouse enter | Standard `context` | Preview popover, hover sound, trigger focus. |
+| `leave` | Mouse leave | Standard `context` | Hide popover, reset preview. |
+
+### Continuous Gestures Example (Hold & Release)
+
+```json
+{
+  "type": "card",
+  "style": "padding: 20px; text-align: center; touch-action: none;",
+  "action": "sys::toast::info::1000::Toggled Play / Pause",
+  "hold": "sys::toast::warning::1500::>> 2.0x Fast Forwarding...",
+  "release": "sys::toast::success::1500::<< Returned to 1.0x Normal Speed",
+  "double": "sys::toast::success::2000::Liked video!",
+  "drag": "sys::console::log::Dropped card at ${finalX}, ${finalY}"
+}
+```
+
 ## System actions
 
 These prefixes are recognized out of the box. Everything after the prefix is the argument.

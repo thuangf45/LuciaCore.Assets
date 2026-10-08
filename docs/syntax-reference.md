@@ -12,6 +12,13 @@ Everything in a LuciaCore page is a **node**: a plain JSON object with a `type` 
 | `style` | string | Raw CSS declarations, scoped automatically to this node (`#id{ ...your css... }`). Supports nested `&:hover{}` / `&:active{}` and `@media(){}` blocks written inline. |
 | `label` | string | Visible text for `text` and `button`. Supports `[icon:Name]` tokens (see Icons below). |
 | `action` | string | What to run on click. See [actions.md](actions.md). |
+| `drag` | string | Enable drag & drop. Set `""` or `"true"` for pure drag, or an action string to run on drop (provides `${finalX}`, `${finalY}`, `${deltaX}`, `${deltaY}` in `context`). |
+| `hold` | string | Action to trigger when pressing and holding for >500ms without moving. |
+| `release` | string | Action to trigger when releasing the pointer after a `hold` has been activated (e.g., reset 2x video speed back to 1x). |
+| `double` / `dblclick` | string | Action to trigger on double-click / double-tap (within 250ms). |
+| `swipe` | string | Action to trigger on a quick fling gesture (provides `${direction}`: `left`, `right`, `up`, `down` in `context`). |
+| `hover` | string | Action to trigger when the cursor enters the node area (`mouseover`). |
+| `leave` | string | Action to trigger when the cursor leaves the node area (`mouseout`). |
 | `params` | object | Extra static data merged alongside the node's `data-*` attributes into the action's `context`. |
 | `props` | object or string | Data available to this node and its children via `props:key` tokens. |
 | `content` | string or object | Name of a `contents` entry (or an inline object) whose `props` are merged in as defaults. |
